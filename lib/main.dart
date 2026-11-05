@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'firebase_options.dart';
 import 'services/auth_service.dart';
@@ -15,13 +16,37 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthGate(),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: AuthGate());
+  }
 }
 
-// Check whether the user is signed in or signed out.
+class AuthGate extends StatelessWidget {
+  AuthGate({super.key});
+
+  final AuthService _authService = AuthService();
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: _authService.authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (snapshot.hasError) {
+          return const Scaffold(
+            body: Center(
+              child: Text('Unable to check sign-in status. Try again.'),
+            ),
+          );
+        }
+        if (snapshot.hasData) return const ProfileScreen();
+        return const AuthenticationScreen();
+      },
+    );
+  }
+}
