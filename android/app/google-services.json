@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "934175155252",
+    "project_id": "sign-in-authentication-lab",
+    "storage_bucket": "sign-in-authentication-lab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934175155252:android:02d45a6f3b35a0b3419661",
+        "android_client_info": {
+          "package_name": "com.example.login_auth_lab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMfXaxzbxd6Ozop-BL-e8GB_EN-UVK52E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
